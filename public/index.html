@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Robot Control</title>
+  <link rel="stylesheet" href="styles.css" />
+ 
+</head>
+<body>
+
+  <div class="container">
+    <h1>Robot Control</h1>
+
+    <p>
+      <label for="move_forward">
+        <input type="checkbox" id="move_forward" />
+        Move Forward
+      </label>
+    </p>
+
+    <p>
+      <label for="move_backwards">
+        <input type="checkbox" id="move_backwards" />
+        Move Backwards + Turn Random + Resume
+      </label>
+    </p>
+
+    <p>
+      <label for="random_movement">
+        <input type="checkbox" id="random_movement" />
+        Random Movement Loop
+      </label>
+    </p>
+
+    <h2>Status</h2>
+    <p>Distance travelled by:</p>
+    <ul>
+      <li>Left Wheel : <span id="left_ticks">0.0</span> cm</li>
+      <li>Right Wheel : <span id="right_ticks">0.0</span> cm</li>
+    </ul>
+    <p>
+      Distance to Obstacle: <span id="obstacle_distance">0.0</span> cm
+    </p>
+  </div>
+
+  <div class="log-container" id="log-container">
+    <h2>Execution Logs</h2>
+    <div id="log-output"></div>
+  </div>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const socket = io();
+
+    function appendLog(text) {
+      const logOutput = document.getElementById("log-output");
+      const entry = document.createElement("div");
+      entry.textContent = text;
+      logOutput.appendChild(entry);
+      logOutput.scrollTop = logOutput.scrollHeight;
+    }
+
+    function animateNumberChange(id, newValue) {
+      const el = document.getElementById(id);
+      el.textContent = newValue;
+      el.style.color = "#007acc";
+      setTimeout(() => {
+        el.style.color = "";
+      }, 500);
+    }
+
+    window.addEventListener("load", function () {
+      const forwardCheckbox = document.getElementById("move_forward");
+      const backwardCheckbox = document.getElementById("move_backwards");
+      const randomCheckbox = document.getElementById("random_movement");
+
+      forwardCheckbox.addEventListener("change", function () {
+        socket.emit("move_forward", Number(this.checked));
+      });
+
+      backwardCheckbox.addEventListener("change", function () {
+        socket.emit("move_backwards", Number(this.checked));
+      });
+
+      randomCheckbox.addEventListener("change", function () {
+        socket.emit("random_movement", Number(this.checked));
+      });
+    });
+
+    socket.on("move_forward", function (data) {
+      const forwardCheckbox = document.getElementById("move_forward");
+      if (typeof data === "object") {
+        animateNumberChange("left_ticks", data.left);
+        animateNumberChange("right_ticks", data.right);
+        animateNumberChange("obstacle_distance", data.distance);
+        appendLog(`[Forward] Left: ${data.left} cm, Right: ${data.right} cm, Obstacle: ${data.distance} cm`);
+      } else {
+        forwardCheckbox.checked = !!data;
+      }
+    });
+
+    socket.on("move_backwards", function (data) {
+      const backwardCheckbox = document.getElementById("move_backwards");
+      if (typeof data === "object") {
+        animateNumberChange("left_ticks", data.left);
+        animateNumberChange("right_ticks", data.right);
+        appendLog(`[Backward] Left: ${data.left} cm, Right: ${data.right} cm`);
+      } else {
+        backwardCheckbox.checked = !!data;
+      }
+    });
+
+    socket.on("random_movement", function (data) {
+      const randomCheckbox = document.getElementById("random_movement");
+      randomCheckbox.checked = !!data;
+    });
+  </script>
+
+</body>
+</html>

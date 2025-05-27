@@ -1,0 +1,182 @@
+/* General reset and font */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f7fa;
+  color: #333;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: flex-start;
+  animation: fadeIn 1s ease forwards;
+  opacity: 0; /* start hidden for fade in */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+/* Container for content */
+.container {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  padding: 30px 40px;
+  transition: box-shadow 0.3s ease;
+}
+.container:hover {
+  box-shadow: 0 12px 28px rgba(0, 122, 204, 0.25);
+}
+
+/* Log container for console-style output */
+.log-container {
+  flex: 1;
+  background-color: #1e1e1e;
+  color: #d4d4d4;
+  padding: 20px;
+  border-radius: 12px;
+  height: 500px;
+  overflow-y: auto;
+  font-family: monospace;
+  font-size: 0.9rem;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Heading styles */
+h1 {
+  text-align: center;
+  color: #007acc;
+  margin-bottom: 30px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  user-select: none;
+}
+
+h2 {
+  font-size: 1.2rem;
+  border-bottom: 2px solid #007acc;
+  padding-bottom: 8px;
+  color: #007acc;
+  margin-top: 40px;
+  margin-bottom: 15px;
+  user-select: none;
+}
+.log-container h2 {
+  color: #ffffff;
+  border-bottom: 1px solid #555;
+  margin-top: 0;
+}
+
+/* Paragraph text */
+p {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+
+/* Checkbox label styling */
+label {
+  font-weight: 600;
+  font-size: 1.2rem;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: color 0.3s ease;
+}
+label:hover {
+  color: #005f99;
+}
+
+input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  accent-color: #007acc;
+  transition: transform 0.15s ease-in-out;
+  flex-shrink: 0;
+}
+input[type="checkbox"]:hover {
+  transform: scale(1.1);
+}
+
+/* List for status display */
+ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 25px;
+  user-select: none;
+}
+ul li {
+  margin-bottom: 10px;
+  transition: color 0.3s ease;
+}
+ul li span {
+  font-weight: 700;
+  color: #222;
+  font-family: monospace;
+  transition: color 0.3s ease;
+}
+
+/* General span styling */
+span {
+  font-weight: 700;
+  color: #222;
+  font-family: monospace;
+}
+
+/* Obstacle distance highlight */
+#obstacle_distance {
+  font-weight: 700;
+  color: #d9534f;
+  font-family: monospace;
+  font-size: 1.3rem;
+  transition: color 0.3s ease;
+  user-select: none;
+}
+
+/* Responsive tweaks */
+@media (max-width: 480px) {
+  body {
+    padding: 10px;
+    flex-direction: column;
+  }
+
+  .container {
+    padding: 20px 25px;
+    max-width: 100%;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  label {
+    font-size: 1rem;
+  }
+
+  ul {
+    font-size: 1rem;
+  }
+
+  #obstacle_distance {
+    font-size: 1.1rem;
+  }
+
+  .log-container {
+    height: 300px;
+    margin-top: 20px;
+  }
+}
