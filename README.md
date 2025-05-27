@@ -1,5 +1,5 @@
 # 🤖 ET1 – Web-Controlled Autonomous Robot  
-**Embedded Computing Final Project – Sumitsai Gawade**
+**Embedded Computing Task 3 Remote Control**
 
 ## 📖 Overview
 **ET1** is a Raspberry Pi-powered autonomous robot system that can be controlled via a browser-based interface. The task demonstrate control of ET1 through webUI and node.js to perform various tasks such as obstacle detection, reverse turning, and looped behavior — 
