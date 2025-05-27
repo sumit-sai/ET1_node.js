@@ -31,7 +31,7 @@ project/
 ## ▶️ Run the Web Server
 From the project directory:
 ```bash
-node webserver.js
+sudo node webserver.js
 ```
 ## 🌐 Access the Interface
 Visit in browser:
