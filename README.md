@@ -16,6 +16,7 @@
 ---
 
 ## 🗂️ Project Structure
+```
 project/
 ├── public/
 │ ├── index.html # Web interface
@@ -25,6 +26,7 @@ project/
 │ ├── move_backwards_random_turn.py
 ├── webserver.js # Node.js server with socket.io integration
 └── README.md # Project documentation
+```
 
 ## ▶️ Run the Web Server
 From the project directory:
