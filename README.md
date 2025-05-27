@@ -1,16 +1,38 @@
-# Introduction to GitHub
+# 🤖 ET1 – Web-Controlled Autonomous Robot  
+**Embedded Computing Final Project – Sumitsai Gawade**
 
-<img src="https://octodex.github.com/images/Professortocat_v2.png" align="right" height="200px" />
-
-Hey @sumit-sai!
-
-Mona here. I'm done preparing your exercise. Hope you enjoy! 💚
-
-Remember, it's self-paced so feel free to take a break! ☕️
-
-[![](https://img.shields.io/badge/Go%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/sumit-sai/ET1_node.js/issues/1)
+## 📖 Overview
+**ET1** is a Raspberry Pi-powered autonomous robot system that can be controlled via a browser-based interface. The task demonstrate control of ET1 through webUI and node.js to perform various tasks such as obstacle detection, reverse turning, and looped behavior — 
 
 ---
 
-&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+## 📸 Features
+- ✅ Forward motion with ultrasonic obstacle detection (HC-SR04)
+- 🔄 Auto-reverse with randomized turn direction
+- 🔁 Loop mode for repeated autonomous behavior
+- 🌐 Web UI to trigger and monitor robot actions
+- 📊 updates on obstacle distance sensors, wheel travel distance values, and action logs
 
+---
+
+## 🗂️ Project Structure
+project/
+├── public/
+│ ├── index.html # Web interface
+│ └── styles.css # UI styling
+├── scripts/
+│ ├── move_forward_until_obstacle.py
+│ ├── move_backwards_random_turn.py
+├── webserver.js # Node.js server with socket.io integration
+└── README.md # Project documentation
+
+## ▶️ Run the Web Server
+From the project directory:
+```bash
+node webserver.js
+```
+## 🌐 Access the Interface
+Visit in browser:
+```bash
+http://localhost:8080
+```
