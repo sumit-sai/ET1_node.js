@@ -105,7 +105,7 @@ try:
             PWM_2.ChangeDutyCycle(BASE_DUTY_CYCLE)
         time.sleep(0.01)
 
-    brake()
+   
 
     
 
@@ -117,7 +117,7 @@ try:
         "right": right_encoder_count,
             
     }))
-    
+    brake()
     # === Turn Random Angle ===
     angle = turn_random_angle()
 
