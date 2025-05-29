@@ -138,6 +138,9 @@ function startRandomLoop(socket) {
   const backScript = path.join(__dirname, "scripts", "move_backwards_random_turn.py");
   const forwardScript = path.join(__dirname, "scripts", "move_forward_until_obstacle.py");
 
+  // Start BACKWARD step
+  socket.emit("move_backwards", 1);  // <-- checkbox turns ON
+
   exec(`python3 ${backScript}`, (error, stdout, stderr) => {
     if (error) {
       console.error("Backwards error:", stderr);
@@ -146,12 +149,17 @@ function startRandomLoop(socket) {
 
     try {
       const backResult = JSON.parse(stdout);
-      socket.emit("move_backwards", backResult);
+      socket.emit("move_backwards", backResult); // <-- shows data
     } catch (err) {
       console.error("Backwards parse error:", stdout);
     }
 
+    socket.emit("move_backwards", 0); // <-- checkbox turns OFF
+
     if (!randomMovementActive) return;
+
+    // Start FORWARD step
+    socket.emit("move_forward", 1); // <-- checkbox turns ON
 
     exec(`python3 ${forwardScript}`, (error2, stdout2, stderr2) => {
       if (error2) {
@@ -161,13 +169,15 @@ function startRandomLoop(socket) {
 
       try {
         const forwardResult = JSON.parse(stdout2);
-        socket.emit("move_forward", forwardResult);
+        socket.emit("move_forward", forwardResult); // <-- shows data
       } catch (err) {
         console.error("Forward parse error:", stdout2);
       }
 
+      socket.emit("move_forward", 0); // <-- checkbox turns OFF
+
       if (randomMovementActive) {
-        startRandomLoop(socket);
+        startRandomLoop(socket); // Recursively continue
       }
     });
   });
